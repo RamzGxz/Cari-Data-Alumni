@@ -8,6 +8,7 @@ import BursaKerja from './pages/BursaKerja';
 import Kegiatan from './pages/Kegiatan';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import LupaPassword from './pages/LupaPassword';
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
         <Route path='/kegiatan' element={<Kegiatan/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+        <Route path='/changepassword' element={<LupaPassword/>}/>
       </Routes>
     </div>
   );
