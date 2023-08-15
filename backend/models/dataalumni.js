@@ -1,15 +1,97 @@
 const mongoose = require('mongoose')
 
 const dataAlumniSchema = new mongoose.Schema({
-    nisn: {
-        type: Number,
+    nama:{
+        type:String,
         required: true
     },
-    nama: {
-        type: String,
-        required: true
+    nisn:{
+        type:String,
+        required:true
     },
-    
+    jenisKelamin:{
+        type:String,
+        required:true
+    },
+    tahunLulus:{
+        type:String,
+        required:true
+    },
+    noIjazah:{
+        type:String,
+        required:true
+    },
+    noSkhun:{
+        type:String,
+        required:true
+    },
+    details:[{
+        nisn:{
+            type:String,
+            required:true
+        },
+        nama:{
+            type:String,
+            required:true
+        },
+        ttl:{
+            type:String,
+            required:true
+        },
+        alamat:{
+            type:String,
+            required:true
+        },
+        noTelp:{
+            type:String,
+            required:true
+        },
+        tahunMasuk:{
+            type:String,
+            required:true
+        },
+        tahunLulus:{
+            type:String,
+            required:true
+        },
+        noIjazah:{
+            type:String,
+            required:true
+        },
+        noSkhun:{
+            type:String,
+            required:true
+        },
+        status:{
+            type:String,
+            required:true
+        },
+        detailStatus:{
+            type:true,
+            required:true
+        },
+        orangTua:{
+            type:String,
+            required:true
+        },
+        namaAyah:{
+            type:String,
+            required:true
+        },
+        pekerjaanAyah:{
+            type:String,
+            required:true
+        },
+        namaIbu:{
+            type:String,
+            required:true
+        },
+        pekerjaanIbu:{
+            type:String,
+            required:true
+        }
+    }]
+
 })
 
 module.exports = mongoose.model('dataAlumni', dataAlumniSchema, 'dataAlumni')
