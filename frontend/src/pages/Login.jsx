@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Colors from '../components/Colors';
 import '../styles/styles.css'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
+    const navigate = useNavigate()
+    
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        const data = {
+            email: email,
+            password: pass
+        }
+
+        try {
+            const res = await axios.post('http://localhost:5656/login', data)
+            console.log(res.data)
+            if(res.data === 'berhasil') {
+                alert('login berhasil!')
+                navigate('/')
+            } else {
+                alert('password atau email anda salah! silahkan mengulang kembali!')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className='' style={{
             backgroundColor: Colors.grey,
@@ -21,18 +47,20 @@ const Login = () => {
                 <div className='w-50 d-flex align-items-center py-5 container h-100 flex-column' data-aos='fade-down' data-aos-duration='1000'>
                     <h1 className='fw-bold'>Sistem Informasi Alumni</h1>
                     <p className='text-black-50 text-center'>Silakan login dengan email dan password anda. Bila belum punya user silakan daftar melalui link Daftar di bawah</p>
-                    <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column'>
+                    <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column' onSubmit={(e)=>{
+                        handleLogin(e)
+                    }}>
                         <div className='form-control form-control-lg bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <i className="fa-solid fa-envelope me-3 fs-5"></i>
                             <input type="email" className='w-100 bg-transparent iLog' placeholder='Email' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e)=> setEmail(e.target.value)}/>
                         </div>
                         <div className='form-control form-control-lg bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <i className="fa-solid fa-key me-3 fs-5"></i>
                             <input type="password" className='w-100 bg-transparent iLog' placeholder='Password' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e) => setPass(e.target.value)}/>
                         </div>
                         <div className='w-100 d-flex justify-content-end'>
                             <Link to={'/changepassword'}>Lupa password?</Link>

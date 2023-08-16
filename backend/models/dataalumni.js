@@ -1,94 +1,82 @@
 const mongoose = require('mongoose')
 
 const dataAlumniSchema = new mongoose.Schema({
-    nama:{
-        type:String,
-        required: true
+    email: {
+        required: true,
+        type: String
     },
-    nisn:{
-        type:String,
-        required:true
+    password: {
+        required: true,
+        type: String
     },
-    jenisKelamin:{
-        type:String,
-        required:true
+    nama: {
+        type: String,
+        required: false
     },
-    tahunLulus:{
-        type:String,
-        required:true
+    nisn: {
+        type: String,
+        required: false
     },
-    noIjazah:{
-        type:String,
-        required:true
+    jenisKelamin: {
+        type: String,
+        required: false
     },
-    noSkhun:{
-        type:String,
-        required:true
+    tahunLulus: {
+        type: String,
+        required: false
     },
-    details:[{
-        nisn:{
-            type:String,
-            required:true
+    noIjazah: {
+        type: String,
+        required: false
+    },
+    noSkhun: {
+        type: String,
+        required: false
+    },
+    details: [{
+        ttl: {
+            type: String,
+            required: false
         },
-        nama:{
-            type:String,
-            required:true
+        alamat: {
+            type: String,
+            required: false
         },
-        ttl:{
-            type:String,
-            required:true
+        noTelp: {
+            type: String,
+            required: false
         },
-        alamat:{
-            type:String,
-            required:true
+        tahunMasuk: {
+            type: String,
+            required: false
         },
-        noTelp:{
-            type:String,
-            required:true
+        status: {
+            type: String,
+            required: false
         },
-        tahunMasuk:{
-            type:String,
-            required:true
+        detailStatus: {
+            type: String,
+            required: false
         },
-        tahunLulus:{
-            type:String,
-            required:true
+        orangTua: {
+            type: String,
+            required: false
         },
-        noIjazah:{
-            type:String,
-            required:true
+        namaAyah: {
+            type: String,
+            required: false
         },
-        noSkhun:{
-            type:String,
-            required:true
+        pekerjaanAyah: {
+            type: String,
+            required: false
         },
-        status:{
-            type:String,
-            required:true
+        namaIbu: {
+            type: String,
+            required: false
         },
-        detailStatus:{
-            type:true,
-            required:true
-        },
-        orangTua:{
-            type:String,
-            required:true
-        },
-        namaAyah:{
-            type:String,
-            required:true
-        },
-        pekerjaanAyah:{
-            type:String,
-            required:true
-        },
-        namaIbu:{
-            type:String,
-            required:true
-        },
-        pekerjaanIbu:{
-            type:String,
-            required:true
+        pekerjaanIbu: {
+            type: String,
+            required: false
         }
     }]
 

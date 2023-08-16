@@ -28,6 +28,7 @@ const Navigations = ({act1, act2, act3}) => {
                         <div className="btn-group" role="group" aria-label="Basic example">
                             <Link className="btn btn-outline-light" to={'/login'}>Login</Link>
                             <Link className="btn btn-outline-light" to={'/register'}>Register</Link>
+                            {/* <DateModule/> */}
                         </div>
                     </div>
                 </div>

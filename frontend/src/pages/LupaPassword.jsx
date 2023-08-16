@@ -1,7 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Colors from '../components/Colors';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const LupaPassword = () => {
+    const [viewEmail, setViewEmail] = useState(true)
+    const [viewPassChanged, setViewPassChanged] = useState(false)
+    const [pass, setPass] = useState('')
+    const [confirmPass, setConfirmPass] = useState('')
+    const [email, setEmail] = useState('')
+    const navigate = useNavigate()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (viewEmail) {
+                const postDataResponse = await axios.post('http://localhost:5656/findEmail', {
+                    email: email
+                });
+                if (postDataResponse.data === 'berhasil') {
+                    alert('email found!!')
+                    setViewEmail(false)
+                    setViewPassChanged(true)
+                } else {
+                    alert('email not found!')
+                    setViewPassChanged(false)
+                    setViewEmail(true)
+                }
+            }
+            if (!viewEmail && viewPassChanged) {
+                if (confirmPass === pass) {
+                    const putData = {
+                        password: pass
+                    };
+                    const putResponse = await axios.put(`http://localhost:5656/putPass/${email}`, putData);
+                    if (putResponse.status === 200) {
+                        alert('Success! you will redirect to login page!')
+                        navigate('/login')
+                    }
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div>
             <div className='' style={{
@@ -20,15 +61,30 @@ const LupaPassword = () => {
                     <div className='w-50 d-flex align-items-center py-5 container h-100 flex-column' data-aos='fade-down' data-aos-duration='1000'>
                         <h1 className='fw-bold'>Sistem Informasi Alumni</h1>
                         <p className='text-black-50 text-center'>Silakan masukkan Email anda, agar kami dapat memunculkan form untuk mereset Kata Sandi Anda.</p>
-                        <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column'>
-                            <div className='form-control form-control-lg bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
+                        <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column' onSubmit={(e) => handleSubmit(e)}>
+                            <div className={`form-control form-control-lg bg-transparent border-1 border-black mb-3 align-items-center ${viewEmail ? 'd-flex' : 'd-none'}`}>
                                 <i className="fa-solid fa-envelope me-3 fs-5"></i>
                                 <input type="email" className='w-100 bg-transparent iLog' placeholder='Email' style={{
                                     border: 'none'
-                                }} />
+                                }} onChange={(e) => setEmail(e.target.value)} />
+                            </div>
+
+                            <div className={`w-100 ${viewPassChanged ? 'd-blobk' : 'd-none'}`}>
+                                <div className={`form-control form-control-lg bg-transparent border-1 border-black mb-3 align-items-center d-flex`}>
+                                    <i className="fa-solid fa-envelope me-3 fs-5"></i>
+                                    <input type="password" className='w-100 bg-transparent iLog' placeholder='New Password' style={{
+                                        border: 'none'
+                                    }} onChange={(e) => { setPass(e.target.value) }} />
+                                </div>
+                                <div className={`form-control form-control-lg bg-transparent border-1 border-black mb-3 align-items-center d-flex`}>
+                                    <i className="fa-solid fa-envelope me-3 fs-5"></i>
+                                    <input type="password" className='w-100 bg-transparent iLog' placeholder='Konfirmasi Password' style={{
+                                        border: 'none'
+                                    }} onChange={(e) => setConfirmPass(e.target.value)} />
+                                </div>
                             </div>
                             <button type='sumbit' className='btn btn-success btn-lg mt-3'>SEND</button>
-                            <p className='mb-0 mt-3'>sudah mengirim? silahkan login <Link to={'/register'}>disini!</Link></p>
+                            <p className='mb-0 mt-3'>sudah mengirim? silahkan login <Link to={'/login'}>disini!</Link></p>
                         </form>
 
                         <Link style={{

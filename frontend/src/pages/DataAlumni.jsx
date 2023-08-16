@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navigations from '../components/Navigations';
 import Colors from '../components/Colors';
 
 const DataAlumni = () => {
+    const [data, setData] = useState([])
+    
     return (
         <div>
             <Navigations act1={'active'}/>

@@ -1,7 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Colors from '../components/Colors';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Register = () => {
+    const [namaAwal, setNamaAwal] = useState('')
+    const [namaAkhir, setNamaAkhir] = useState('')
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
+    const [confirmPass, setConfirmPass] = useState('')
+    const navigate = useNavigate()
+    const handleReg = async(e) =>{
+        e.preventDefault()
+        const data = {
+            namaAwal: namaAwal,
+            namaAkhir: namaAkhir,
+            email: email,
+            password: pass
+        }
+        if(pass === confirmPass) {
+            try {
+                await axios.post('http://localhost:5656/postData', data)
+                alert('reg berhasil!')
+                navigate('/login')
+            } catch (error) {
+                console.log(error)
+            }
+        } else{
+            alert('password tidak sama!')
+        }
+    }
+
     return (
         <div className='' style={{
             backgroundColor: Colors.grey,
@@ -19,31 +47,31 @@ const Register = () => {
                 <div className='w-50 d-flex align-items-center py-5 container h-100 flex-column' data-aos='fade-down' data-aos-duration='1000'>
                     <h1 className='fw-bold'>Sistem Informasi Alumni</h1>
                     <p className='text-black-50 text-center'>Silakan Masukan Informasi Pengguna di bawah ini. Setelah berhasil mendaftar silakan login dan lengkapi data Anda melalui menu Profil</p>
-                    <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column'>
+                    <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column' onSubmit={(e) =>handleReg(e)}>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="text" className='w-100 bg-transparent iLog' placeholder='Nama Awal' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e)=>setNamaAwal(e.target.value)}/>
                         </div>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="text" className='w-100 bg-transparent iLog' placeholder='Nama Akhir' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e)=>setNamaAkhir(e.target.value)}/>
                         </div>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="email" className='w-100 bg-transparent iLog' placeholder='Email' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e)=> setEmail(e.target.value)}/>
                         </div>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="password" className='w-100 bg-transparent iLog' placeholder='Password' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e) => setPass(e.target.value)}/>
                         </div>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="password" className='w-100 bg-transparent iLog' placeholder='Konfirmasi Password' style={{
                                 border: 'none'
-                            }} />
+                            }} onChange={(e)=>setConfirmPass(e.target.value)}/>
                         </div>
                         <button type='sumbit' className='btn btn-lg mt-3 text-white' style={{
                             backgroundColor: Colors.darkBlue
