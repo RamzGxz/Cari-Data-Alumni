@@ -4,7 +4,7 @@ import '../styles/styles.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-const Login = () => {
+const Login = ({setIsLoggedIn, setUserData}) => {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const navigate = useNavigate()
@@ -18,9 +18,10 @@ const Login = () => {
 
         try {
             const res = await axios.post('http://localhost:5656/login', data)
-            console.log(res.data)
-            if(res.data === 'berhasil') {
+            if(res.data.message === 'berhasil') {
                 alert('login berhasil!')
+                setIsLoggedIn(true)
+                setUserData(res.data.data)
                 navigate('/')
             } else {
                 alert('password atau email anda salah! silahkan mengulang kembali!')

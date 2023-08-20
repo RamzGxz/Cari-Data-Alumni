@@ -7,6 +7,7 @@ const Register = () => {
     const [namaAkhir, setNamaAkhir] = useState('')
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
+    const [jenisKelamin, setJenisKelamin] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     const navigate = useNavigate()
     const handleReg = async(e) =>{
@@ -15,7 +16,8 @@ const Register = () => {
             namaAwal: namaAwal,
             namaAkhir: namaAkhir,
             email: email,
-            password: pass
+            password: pass,
+            jenisKelamin: jenisKelamin
         }
         if(pass === confirmPass) {
             try {
@@ -29,6 +31,8 @@ const Register = () => {
             alert('password tidak sama!')
         }
     }
+
+    console.log(jenisKelamin)
 
     return (
         <div className='' style={{
@@ -46,7 +50,7 @@ const Register = () => {
                 </div>
                 <div className='w-50 d-flex align-items-center py-5 container h-100 flex-column' data-aos='fade-down' data-aos-duration='1000'>
                     <h1 className='fw-bold'>Sistem Informasi Alumni</h1>
-                    <p className='text-black-50 text-center'>Silakan Masukan Informasi Pengguna di bawah ini. Setelah berhasil mendaftar silakan login dan lengkapi data Anda melalui menu Profil</p>
+                    <p className='text-black-50 text-center'>Silakan Masukan Informasi Pengguna di bawah ini. Setelah berhasil mendaftar silakan login dan lengkapi data Anda melalui menu dashboard</p>
                     <form action="" className='w-100 container mt-4 d-flex justify-content-center flex-column' onSubmit={(e) =>handleReg(e)}>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="text" className='w-100 bg-transparent iLog' placeholder='Nama Awal' style={{
@@ -57,6 +61,15 @@ const Register = () => {
                             <input type="text" className='w-100 bg-transparent iLog' placeholder='Nama Akhir' style={{
                                 border: 'none'
                             }} onChange={(e)=>setNamaAkhir(e.target.value)}/>
+                        </div>
+                        <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
+                            <select className='w-100 bg-transparent iLog text-black-50' placeholder='Jenis Kelamin' style={{
+                                border: 0
+                            }} onChange={(e) => setJenisKelamin(e.target.value)}>
+                                <option value={''}>Jenis Kelamin</option>
+                                <option value={'laki-laki'}>Laki-laki</option>
+                                <option value={'perempuan'}>Perempuan</option>
+                            </select>
                         </div>
                         <div className='form-control bg-transparent border-1 border-black mb-3 d-flex align-items-center'>
                             <input type="email" className='w-100 bg-transparent iLog' placeholder='Email' style={{

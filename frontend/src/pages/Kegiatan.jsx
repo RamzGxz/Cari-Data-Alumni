@@ -1,10 +1,10 @@
 import React from 'react';
 import Navigations from '../components/Navigations';
 
-const Kegiatan = () => {
+const Kegiatan = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
     return (
         <div>
-            <Navigations act3={'active'}/>
+            <Navigations act3={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData}/>
             <div className='w-100 container d-flex justify-content-center align-items-center flex-column' style={{
                 marginTop: '8%'
             }} data-aos='zoom-in' data-aos-duration='500'>

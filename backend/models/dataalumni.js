@@ -58,10 +58,7 @@ const dataAlumniSchema = new mongoose.Schema({
             type: String,
             required: false
         },
-        orangTua: {
-            type: String,
-            required: false
-        },
+
         namaAyah: {
             type: String,
             required: false
@@ -79,7 +76,6 @@ const dataAlumniSchema = new mongoose.Schema({
             required: false
         }
     }]
-
 })
 
 module.exports = mongoose.model('dataAlumni', dataAlumniSchema, 'dataAlumni')
