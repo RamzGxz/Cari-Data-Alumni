@@ -1,21 +1,28 @@
 import React from 'react';
 import Navigations from '../components/Navigations';
+import { useMediaQuery } from 'react-responsive';
 
-const Kegiatan = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
+
+const Kegiatan = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 })
     return (
         <div>
-            <Navigations act3={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData}/>
+            <Navigations act3={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
             <div className='w-100 container d-flex justify-content-center align-items-center flex-column' style={{
-                marginTop: '8%'
+                marginTop: isMobile ? '15%' : '8%'
             }} data-aos='zoom-in' data-aos-duration='500'>
                 <div className='d-flex justify-content-between align-items-center w-100'>
-                    <div className='bg-black w-75' style={{
+                    <div className={`bg-black ${isMobile ? 'w-25' : 'w-75'}`} style={{
                         height: '1px',
                     }}></div>
-                    <div className='w-50 d-flex justify-content-center'>
-                        <h1>Kegiatan</h1>
+                    <div className={`${isMobile ? 'w-50' : 'w-75'} d-flex justify-content-center`}>
+                        {isMobile ? (
+                            <h4 className=''>Kegiatan</h4>
+                        ) : (
+                            <h1>Kegiatan</h1>
+                        )}
                     </div>
-                    <div className='bg-black w-75' style={{
+                    <div className={`bg-black ${isMobile ? 'w-25' : 'w-75'}`} style={{
                         height: '1px',
                     }}></div>
                 </div>
@@ -24,6 +31,7 @@ const Kegiatan = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
                     <p>Tidak ada info bulan ini!</p>
                 </div>
             </div>
+
         </div>
     );
 };

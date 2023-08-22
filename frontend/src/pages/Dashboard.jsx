@@ -1,9 +1,10 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
+import { useMediaQuery } from 'react-responsive';
 
 const Dashboard = ({ setIsLoggedIn, setUserData, userData }) => {
     const data = userData[0]
-
+    const isMobile = useMediaQuery({ maxWidth: 767 })
     return (
         <div className='w-100 d-flex justify-content-between align-items-center bg-dark text-white' style={{
             // backgroundColor: `rgba(229, 230, 228, 0.5)`

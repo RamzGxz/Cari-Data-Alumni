@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Navigations from '../components/Navigations';
 import Colors from '../components/Colors';
 import axios from 'axios'
+import { useMediaQuery } from 'react-responsive';
 
-const DataAlumni = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
+const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 })
     const [data, setData] = useState([])
     const [query, setQuery] = useState('')
     const [viewData, setViewData] = useState(false)
@@ -31,10 +33,14 @@ const DataAlumni = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
         try {
             const res = await axios.get(`http://localhost:5656/findData?query=${query}`)
             setData(res.data)
-            setViewData(true)
             console.log(data)
+            console.log(viewData)
             if (query === '') {
                 setViewData(false)
+            } else if (res.data.length === 0) {
+                setViewData(false)
+            } else {
+                setViewData(true)
             }
         } catch (error) {
             console.log(error)
@@ -43,27 +49,31 @@ const DataAlumni = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
 
     return (
         <div>
-            <Navigations act1={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData}/>
+            <Navigations act1={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
             <div className='w-100 container d-flex justify-content-center align-items-center flex-column' style={{
-                marginTop: '8%'
+                marginTop: isMobile ? '15%' : '8%'
             }} data-aos='zoom-in' data-aos-duration='500'>
                 <div className='d-flex justify-content-between align-items-center w-100'>
-                    <div className='bg-black w-75' style={{
+                    <div className={`bg-black ${isMobile ? 'w-25': 'w-75'}`} style={{
                         height: '1px',
                     }}></div>
-                    <div className='w-75 d-flex justify-content-center'>
-                        <h1>Pencarian Data Alumni</h1>
+                    <div className={`${isMobile ? 'w-50': 'w-75'} d-flex justify-content-center`}>
+                        {isMobile ? (
+                            <h6 className='mb-0'>Pencarian Data Alumni</h6>
+                        ): (
+                            <h1>Pencarian Data Alumni</h1>
+                        )}
                     </div>
-                    <div className='bg-black w-75' style={{
+                    <div className={`bg-black ${isMobile ? 'w-25': 'w-75'}`} style={{
                         height: '1px',
                     }}></div>
                 </div>
 
                 <form action="" className='w-100 mt-5 d-flex justify-content-center flex-column align-items-center' onSubmit={(e) => handleFindData(e)}>
-                    <input type="text" className='w-100 form-control-plaintext form-control px-2 ' placeholder='Cari data berdasarkan nisn, nama, tahun lulus, jenis kelamin, nomor ijazah, nomor SKHUN' style={{
+                    <input type="text" className={`w-100 form-control-plaintext form-control px-2 ${isMobile ? 'form-control-sm': ''}`} placeholder='Cari data berdasarkan nisn, nama, tahun lulus, jenis kelamin, nomor ijazah, nomor SKHUN' style={{
                         borderBottom: '1px solid black'
                     }} onChange={(e) => { setQuery(e.target.value) }} />
-                    <button type='submit' className='btn w-25 mt-5 fw-bold fs-5 fst-italic' style={{
+                    <button type='submit' className={`btn w-25 mt-5 fw-bold fs-5 fst-italic ${isMobile ? 'btn-sm': ''}`} style={{
                         backgroundColor: Colors.green,
                         color: 'white'
                     }}>CARI</button>
@@ -128,7 +138,7 @@ const DataAlumni = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
                             </tbody>
                         </table>
                     ) : (
-                        <h3 className='text-center'>Anda belum mengisi apapun!</h3>
+                        <h3 className='text-center'>Anda belum mengisi apapun! atau data tidak ada!</h3>
                     )}
                 </div>
             </div>

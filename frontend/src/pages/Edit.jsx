@@ -2,10 +2,12 @@ import React from 'react';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import axios from 'axios'
+import { useMediaQuery } from 'react-responsive';
 
 const Edit = ({ setIsLoggedIn, setUserData, userData }) => {
     const data = userData[0]
-
+    const isMobile = useMediaQuery({ maxWidth: 767 })
+    
     // state data
     const [nisn, setNisn] = useState(data.nisn)
     const [nama, setNama] = useState(data.nama)
