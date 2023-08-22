@@ -16,6 +16,9 @@ mongoose.connect(process.env.DATABASE_URL,{
     console.log('database connected!')
 }).catch((err) =>{console.log(err)})
 
+app.get('/', (req, res)=>{
+    res.send('connected!')
+})
 
 app.listen(port,() =>{
     console.log(`server listed on http://localhost:${port}/`)
