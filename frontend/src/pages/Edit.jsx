@@ -46,7 +46,7 @@ const Edit = ({ setIsLoggedIn, setUserData, userData }) => {
         }
 
         try {
-            const res = await axios.put(`http://localhost:5656/editData/${data._id}`, dataUpdated)
+            const res = await axios.put(`https://apismanta.cyclic.cloud/editData/${data._id}`, dataUpdated)
             console.log(res)
             if(res.data.message === 'berhasil') {
                 alert('data has been edited!')

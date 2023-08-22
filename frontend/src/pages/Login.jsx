@@ -21,7 +21,7 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
         }
 
         try {
-            const res = await axios.post('http://localhost:5656/login', data)
+            const res = await axios.post('https://apismanta.cyclic.cloud/login', data)
             if (res.data.message === 'berhasil') {
                 alert('login berhasil!')
                 setIsLoggedIn(true)
