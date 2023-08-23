@@ -46,6 +46,7 @@ const Sidebar = ({ setIsLoggedIn, setUserData, userData, act1, act2 }) => {
             <hr />
             <div className="dropdown">
                 <Link to='/dashboard' className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src={`http://localhost:5656/${userData[0].details[0].img}`} alt="" width={30} className='rounded-circle me-2' height={30} />
                     <strong className='text-capitalize'>{userData[0].nama}</strong>
                 </Link>
                 <ul className="dropdown-menu dropdown-menu-dark text-small shadow">

@@ -74,6 +74,10 @@ const dataAlumniSchema = new mongoose.Schema({
         pekerjaanIbu: {
             type: String,
             required: false
+        },
+        img: {
+            type: String,
+            required: false
         }
     }]
 })

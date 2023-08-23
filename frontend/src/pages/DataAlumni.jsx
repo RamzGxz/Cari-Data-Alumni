@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Navigations from '../components/Navigations';
 import Colors from '../components/Colors';
 import axios from 'axios'
 import { useMediaQuery } from 'react-responsive';
+import Loaders from '../components/Loaders';
+
 
 const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
     const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -31,14 +33,13 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
     const handleFindData = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.get(`https://apismanta.cyclic.cloud/findData?query=${query}`)
+            const res = await axios.get(`http://localhost:5656/findData?query=${query}`)
             setData(res.data)
-            console.log(data)
-            console.log(viewData)
             if (query === '') {
                 setViewData(false)
             } else if (res.data.length === 0) {
                 setViewData(false)
+                alert('data tidak ditemukan!')
             } else {
                 setViewData(true)
             }
@@ -54,26 +55,26 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
                 marginTop: isMobile ? '15%' : '8%'
             }} data-aos='zoom-in' data-aos-duration='500'>
                 <div className='d-flex justify-content-between align-items-center w-100'>
-                    <div className={`bg-black ${isMobile ? 'w-25': 'w-75'}`} style={{
+                    <div className={`bg-black ${isMobile ? 'w-25' : 'w-75'}`} style={{
                         height: '1px',
                     }}></div>
-                    <div className={`${isMobile ? 'w-50': 'w-75'} d-flex justify-content-center`}>
+                    <div className={`${isMobile ? 'w-50' : 'w-75'} d-flex justify-content-center`}>
                         {isMobile ? (
                             <h6 className='mb-0'>Pencarian Data Alumni</h6>
-                        ): (
+                        ) : (
                             <h1>Pencarian Data Alumni</h1>
                         )}
                     </div>
-                    <div className={`bg-black ${isMobile ? 'w-25': 'w-75'}`} style={{
+                    <div className={`bg-black ${isMobile ? 'w-25' : 'w-75'}`} style={{
                         height: '1px',
                     }}></div>
                 </div>
 
                 <form action="" className='w-100 mt-5 d-flex justify-content-center flex-column align-items-center' onSubmit={(e) => handleFindData(e)}>
-                    <input type="text" className={`w-100 form-control-plaintext form-control px-2 ${isMobile ? 'form-control-sm': ''}`} placeholder='Cari data berdasarkan nisn, nama, tahun lulus, jenis kelamin, nomor ijazah, nomor SKHUN' style={{
+                    <input type="text" className={`w-100 form-control-plaintext form-control px-2 ${isMobile ? 'form-control-sm' : ''}`} placeholder='Cari data berdasarkan nisn, nama, tahun lulus, jenis kelamin, nomor ijazah, nomor SKHUN' style={{
                         borderBottom: '1px solid black'
                     }} onChange={(e) => { setQuery(e.target.value) }} />
-                    <button type='submit' className={`btn w-25 mt-5 fw-bold fs-5 fst-italic ${isMobile ? 'btn-sm': ''}`} style={{
+                    <button type='submit' className={`btn w-25 mt-5 fw-bold fs-5 fst-italic ${isMobile ? 'btn-sm' : ''}`} style={{
                         backgroundColor: Colors.green,
                         color: 'white'
                     }}>CARI</button>
@@ -83,63 +84,65 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
                     maxHeight: '40vh',
                     overflowX: 'auto'
                 }}>
-                    {viewData ? (
-                        <table className="table table-responsive table-hover text-center table-sm">
-                            <thead className='table-dark sticky-top'>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">NISN</th>
-                                    <th scope="col">Jenis Kelamin</th>
-                                    <th scope="col">Tahun Lulus</th>
-                                    <th scope="col">No. Ijazah</th>
-                                    <th scope="col">No. SKHUN</th>
-                                    <th scope="col">Details</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data.map((item, list) => {
-                                    return (
-                                        <tr key={item._id}>
-                                            <th scope="row">{list + 1}</th>
-                                            <td className='text-capitalize'>{item.nama}</td>
-                                            <td>{item.nisn}</td>
-                                            <td className='text-capitalize'>{item.jenisKelamin}</td>
-                                            <td>{item.tahunLulus}</td>
-                                            <td>{item.noIjazah}</td>
-                                            <td>{item.noSkhun}</td>
-                                            <td>
-                                                <button className='btn btn-sm btn-outline-dark' onClick={() => {
-                                                    setViewDetails(true)
-                                                    setNisn(item.nisn)
-                                                    setNama(item.nama)
-                                                    setTtl(item.ttl)
-                                                    setAlamat(item.alamat)
-                                                    setNoTelp(item.noTelp)
-                                                    setTahunMasuk(item.tahunMasuk)
-                                                    setTahunLulus(item.tahunLulus)
-                                                    setNoIjazah(item.noIjazah)
-                                                    setNoSkhun(item.noSkhun)
-                                                    setStatus(item.details[0].status)
-                                                    setDetailStatus(item.details[0].detailStatus)
-                                                    setNamaAyah(item.details[0].namaAyah)
-                                                    setPekerjaanAyah(item.details[0].pekerjaanAyah)
-                                                    setNamaIbu(item.details[0].namaIbu)
-                                                    setPekerjaanIbu(item.details[0].pekerjaanIbu)
-                                                    setAlamat(item.details[0].alamat)
-                                                    setTtl(item.details[0].ttl)
-                                                    setNoTelp(item.details[0].noTelp)
-                                                    setTahunMasuk(item.details[0].tahunMasuk)
-                                                }}>Lihat Detail</button>
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <h3 className='text-center'>Anda belum mengisi apapun! atau data tidak ada!</h3>
-                    )}
+                    <Suspense fallback={<Loaders />}>
+                        {viewData ? (
+                            <table className="table table-responsive table-hover text-center table-sm">
+                                <thead className='table-dark sticky-top'>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">NISN</th>
+                                        <th scope="col">Jenis Kelamin</th>
+                                        <th scope="col">Tahun Lulus</th>
+                                        <th scope="col">No. Ijazah</th>
+                                        <th scope="col">No. SKHUN</th>
+                                        <th scope="col">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.map((item, list) => {
+                                        return (
+                                            <tr key={item._id}>
+                                                <th scope="row">{list + 1}</th>
+                                                <td className='text-capitalize'>{item.nama}</td>
+                                                <td>{item.nisn}</td>
+                                                <td className='text-capitalize'>{item.jenisKelamin}</td>
+                                                <td>{item.tahunLulus}</td>
+                                                <td>{item.noIjazah}</td>
+                                                <td>{item.noSkhun}</td>
+                                                <td>
+                                                    <button className='btn btn-sm btn-outline-dark' onClick={() => {
+                                                        setViewDetails(true)
+                                                        setNisn(item.nisn)
+                                                        setNama(item.nama)
+                                                        setTtl(item.ttl)
+                                                        setAlamat(item.alamat)
+                                                        setNoTelp(item.noTelp)
+                                                        setTahunMasuk(item.tahunMasuk)
+                                                        setTahunLulus(item.tahunLulus)
+                                                        setNoIjazah(item.noIjazah)
+                                                        setNoSkhun(item.noSkhun)
+                                                        setStatus(item.details[0].status)
+                                                        setDetailStatus(item.details[0].detailStatus)
+                                                        setNamaAyah(item.details[0].namaAyah)
+                                                        setPekerjaanAyah(item.details[0].pekerjaanAyah)
+                                                        setNamaIbu(item.details[0].namaIbu)
+                                                        setPekerjaanIbu(item.details[0].pekerjaanIbu)
+                                                        setAlamat(item.details[0].alamat)
+                                                        setTtl(item.details[0].ttl)
+                                                        setNoTelp(item.details[0].noTelp)
+                                                        setTahunMasuk(item.details[0].tahunMasuk)
+                                                    }}>Lihat Detail</button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <h3 className='text-center'>Anda belum mengisi apapun! atau data tidak ada!</h3>
+                        )}
+                    </Suspense>
                 </div>
             </div>
 

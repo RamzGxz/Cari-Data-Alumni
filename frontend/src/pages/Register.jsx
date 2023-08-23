@@ -24,7 +24,7 @@ const Register = () => {
         }
         if (pass === confirmPass) {
             try {
-                await axios.post('https://apismanta.cyclic.cloud/postData', data)
+                await axios.post('http://localhost:5656/postData', data)
                 alert('reg berhasil!')
                 navigate('/login')
             } catch (error) {

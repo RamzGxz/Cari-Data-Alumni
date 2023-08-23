@@ -1,6 +1,7 @@
 const dataalumni = require("../models/dataalumni");
 const bcrypt = require('bcrypt');
 
+
 const hashPassword = async (inputPassword) => {
     const saltRounds = 10
     try {
@@ -43,7 +44,8 @@ module.exports = {
                     namaAyah: 'null',
                     pekerjaanAyah: 'null',
                     namaIbu: 'null',
-                    pekerjaanIbu: 'null'
+                    pekerjaanIbu: 'null',
+                    img: 'null'
                 }]
             });
             await dataToSave.save();
@@ -140,6 +142,26 @@ module.exports = {
                 res.json({
                     message: 'berhasil',
                     data: find
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    img: async (req, res) => {
+        try {
+            const resp = await dataalumni.updateOne({_id: req.params._id}, {
+                $set : {
+                    'details.0.img' : req.file.path
+                }
+            })
+            if(resp.modifiedCount === 1) {
+                res.json({
+                    message: 'image upload successfully'
+                })
+            } else {
+                res.json({
+                    message: 'image not uploaded!'
                 })
             }
         } catch (error) {

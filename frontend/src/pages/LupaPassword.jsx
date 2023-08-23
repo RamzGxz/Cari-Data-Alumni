@@ -17,7 +17,7 @@ const LupaPassword = () => {
         e.preventDefault();
         try {
             if (viewEmail) {
-                const postDataResponse = await axios.post('https://apismanta.cyclic.cloud/findEmail', {
+                const postDataResponse = await axios.post('http://localhost:5656/findEmail', {
                     email: email
                 });
                 if (postDataResponse.data === 'berhasil') {
