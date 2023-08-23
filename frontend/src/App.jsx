@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import LupaPassword from './pages/LupaPassword';
 import Dashboard from './pages/Dashboard';
 import Edit from './pages/Edit';
+import Testimoni from './pages/Testimoni';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/changepassword' element={<LupaPassword />} />
         <Route path='/dashboard' element={<Dashboard setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} userData={userData} />} />
         <Route path='/edit' element={<Edit setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} userData={userData} />} />
+        <Route path='/testimoni' element={<Testimoni/>}/>
       </Routes>
     </div>
   );
