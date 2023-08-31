@@ -52,7 +52,7 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
         <div>
             <Navigations act1={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
             <div className='w-100 container d-flex justify-content-center align-items-center flex-column' style={{
-                marginTop: isMobile ? '15%' : '8%'
+                marginTop: isMobile ? '20%' : '8%'
             }} data-aos='zoom-in' data-aos-duration='500'>
                 <div className='d-flex justify-content-between align-items-center w-100'>
                     <div className={`bg-black ${isMobile ? 'w-25' : 'w-75'}`} style={{
@@ -146,14 +146,14 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
                 </div>
             </div>
 
-            <div className='w-100 d-flex justify-content-center align-items-center vh-100 position-fixed' style={{
+            <div className={`w-100 d-flex justify-content-center align-items-center vh-100 position-fixed ${isMobile ? 'container': ''}`} style={{
                 top: viewDetails ? '50%' : '-50%',
                 left: '50%',
                 transform: 'translate(-50%,-50%)',
                 backgroundColor: `rgba(0,0,0, 0.7)`,
                 transition: 'all ease-in-out .5s'
             }}>
-                <div className='py-3 bg-white w-50 container rounded-3 d-flex justify-content-center flex-column align-items-center'>
+                <div className={`py-3 bg-white ${isMobile ? 'w-100' : 'w-50'} container rounded-3 d-flex justify-content-center flex-column align-items-center`}>
                     <div className='w-100 justify-content-end d-flex align-items-center'>
                         <button className='btn btn-close' onClick={() => {
                             setViewDetails(false)
@@ -164,7 +164,7 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
                         maxHeight: '60vh',
                         overflowX: 'auto'
                     }}>
-                        <table className="table w-100 table-hover table-striped">
+                        <table className="table w-100 table-hover table-striped table-responsive">
                             <tbody>
                                 <tr>
                                     <td>NISN</td>

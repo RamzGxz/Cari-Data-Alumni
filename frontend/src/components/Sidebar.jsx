@@ -24,7 +24,7 @@ const Sidebar = ({ setIsLoggedIn, setUserData, userData, act1, act2 }) => {
         }}>
             <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <img src="https://sman1bwi.sch.id/wp-content/uploads/2020/07/cropped-Logo_SMAN_1_Banyuwangi-removebg-preview-1.png" alt="" width={35} className='me-2' />
-                <span className="fs-4 mb-0">SMANSA SOT</span>
+                <span>SMANSA SOT</span>
             </a>
             <hr />
             <ul className="nav nav-pills flex-column mb-auto">

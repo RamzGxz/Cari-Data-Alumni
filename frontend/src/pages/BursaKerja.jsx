@@ -8,7 +8,7 @@ const BursaKerja = ({isLoggedIn, userData, setUserData, setIsLoggedIn}) => {
         <div>
             <Navigations act2={'active'} isLoggedIn={isLoggedIn} userData={userData} setIsLoggedIn={setIsLoggedIn} setUserData={setUserData}/>
             <div className='w-100 container d-flex justify-content-center align-items-center flex-column' style={{
-                marginTop: isMobile ? '15%' : '8%'
+                marginTop: isMobile ? '20%' : '8%'
             }} data-aos='zoom-in' data-aos-duration='500'>
                 <div className='d-flex justify-content-between align-items-center w-100'>
                     <div className={`bg-black ${isMobile ? 'w-25': 'w-75'}`} style={{

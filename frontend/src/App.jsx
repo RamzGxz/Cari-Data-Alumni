@@ -33,7 +33,7 @@ const App = () => {
         <Route path='/changepassword' element={<LupaPassword />} />
         <Route path='/dashboard' element={<Dashboard setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} userData={userData} />} />
         <Route path='/edit' element={<Edit setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} userData={userData} />} />
-        <Route path='/testimoni' element={<Testimoni/>}/>
+        <Route path='/testimoni' element={<Testimoni setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} userData={userData} isLoggedIn={isLoggedIn}/>}/>
       </Routes>
     </div>
   );

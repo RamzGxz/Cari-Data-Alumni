@@ -20,7 +20,7 @@ const Edit = ({ setIsLoggedIn, setUserData, userData }) => {
             const res = await axios.post(`http://localhost:5656/imageUploads/${userData[0]._id}`, formData)
             if(res.data.message === 'image upload successfully'){
                 alert('foto telah terupload')
-                setUserData(userData)
+                setUserData(res.data.data)
             } else{
                 alert('maaf terjadi kesalahan')
             }

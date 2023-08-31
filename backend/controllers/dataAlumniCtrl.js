@@ -155,9 +155,11 @@ module.exports = {
                     'details.0.img' : req.file.path
                 }
             })
+            const find = await dataalumni.find({_id: req.params._id})
             if(resp.modifiedCount === 1) {
                 res.json({
-                    message: 'image upload successfully'
+                    message: 'image upload successfully',
+                    data: find
                 })
             } else {
                 res.json({
