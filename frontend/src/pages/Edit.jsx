@@ -17,7 +17,7 @@ const Edit = ({ setIsLoggedIn, setUserData, userData }) => {
         const formData = new FormData()
         formData.append('image', seletedFile)
         try {
-            const res = await axios.post(`http://localhost:5656/imageUploads/${userData[0]._id}`, formData)
+            const res = await axios.post(`https://apismanta.cyclic.cloud/imageUploads/${userData[0]._id}`, formData)
             if(res.data.message === 'image upload successfully'){
                 alert('foto telah terupload')
                 setUserData(res.data.data)
@@ -67,8 +67,7 @@ const Edit = ({ setIsLoggedIn, setUserData, userData }) => {
         }
 
         try {
-            const res = await axios.put(`http://localhost:5656/editData/${data._id}`, dataUpdated)
-            console.log(res)
+            const res = await axios.put(`https://apismanta.cyclic.cloud/editData/${data._id}`, dataUpdated)
             if (res.data.message === 'berhasil') {
                 alert('data has been edited!')
                 setUserData(res.data.data)

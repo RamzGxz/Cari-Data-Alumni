@@ -33,7 +33,7 @@ const DataAlumni = ({ isLoggedIn, userData, setUserData, setIsLoggedIn }) => {
     const handleFindData = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.get(`http://localhost:5656/findData?query=${query}`)
+            const res = await axios.get(`https://apismanta.cyclic.cloud/findData?query=${query}`)
             setData(res.data)
             if (query === '') {
                 setViewData(false)

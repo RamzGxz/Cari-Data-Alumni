@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import Colors from './Colors';
 import { Link, useNavigate } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
 
 const Sidebar = ({ setIsLoggedIn, setUserData, userData, act1, act2 }) => {
     const navigate = useNavigate()
-    const isMobile = useMediaQuery({ maxWidth: 767 })
 
     const [clicked, setClicked] = useState(true)
     const handleLogout = (e) => {
@@ -46,7 +44,7 @@ const Sidebar = ({ setIsLoggedIn, setUserData, userData, act1, act2 }) => {
             <hr />
             <div className="dropdown">
                 <Link to='/dashboard' className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src={`http://localhost:5656/${userData[0].details[0].img}`} alt="" width={30} className='rounded-circle me-2' height={30} />
+                    <img src={`https://apismanta.cyclic.cloud/${userData[0].details[0].img}`} alt="" width={30} className='rounded-circle me-2' height={30} />
                     <strong className='text-capitalize'>{userData[0].nama}</strong>
                 </Link>
                 <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
