@@ -35,8 +35,6 @@ const Register = () => {
         }
     }
 
-    console.log(jenisKelamin)
-
     return (
         <div className='' style={{
             backgroundColor: Colors.grey,
